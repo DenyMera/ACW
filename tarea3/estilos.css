@@ -1,10 +1,12 @@
+/* valores a la fuente principal */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 20px;
     background-color: #ffffff;
 }
-
+/* centramos el contenedor principal y redondeamos los bordes para 
+un diseño mas amigable */
 .container {
     max-width: 400px;
     margin: 0 auto;
@@ -12,57 +14,58 @@ body {
     padding: 20px;
     border-radius: 5px;
 }
-
+/* el titulo lo centramos y le damos un color negro */
 h1 {
     text-align: center;
     color: #333;
 }
-
+/* en los grupos del formulario le damos una separacion */
 .form-group {
     margin-bottom: 15px;
 }
-
+/* hacemos que las etiquetas esten arriba de los input y separamos el margen */
 label {
     display: block;
     margin-bottom: 5px;
 }
-
+/* hacemos que el input ocupe todo el espacio creado y redondeamos para mejor experiencia */
 input {
     width: 100%;
     padding: 8px;
     border: 1px solid #ddd;
     border-radius: 3px;
 }
-
+/* en los botones sean una fila con espacio entre ellos y le damos margen de arriba */
 .buttons {
     display: flex;
     gap: 10px;
     margin-top: 20px;
 }
-
+/* aqui estelizamos los botones con un diseño coherente con la pag */
 button {
     padding: 10px;
     border: none;
     border-radius: 3px;
     color: white;
 }
-
+/* le damos color verde al boton de ingresar */
 #btnIngresar {
     background: #4CAF50;
     flex: 1;
 }
-
+/* le damos colore azul al boton mostrar */
 #btnMostrar {
     background: #2196F3;
     flex: 1;
 }
-
+/* espaciado para separar la lista de clientes */
 .client-list {
     margin-top: 20px;
     border-top: 1px solid #ddd;
     padding-top: 20px;
 }
-
+/* cuando enseñamos los clientes como será el contenedor en este caso
+un gris bajito como para separar del body y sea visible */
 .client-item {
     background: #f9f9f9;
     padding: 10px;
