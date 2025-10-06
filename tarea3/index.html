@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Clientes</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Registro de Clientes</h1>
+        
+        <!-- Formulario para ingresar los datos del cliente -->
+        <div class="form-group">
+            <label>Nombre:</label>
+            <input type="text" id="nombre">
+        </div>
+        
+        <div class="form-group">
+            <label>Apellido:</label>
+            <input type="text" id="apellido">
+        </div>
+        
+        <div class="form-group">
+            <label>DNI:</label>
+            <input type="text" id="dni">
+        </div>
+        
+        <div class="form-group">
+            <label>Teléfono:</label>
+            <input type="text" id="telefono">
+        </div>
+        
+        <div class="form-group">
+            <label>Correo:</label>
+            <input type="email" id="correo">
+        </div>
+        
+        <!-- Botones para ingresar y mostrar clientes -->
+        <div class="buttons">
+            <button id="btnIngresar">Ingresar Cliente</button>
+            <button id="btnMostrar">Mostrar Clientes</button>
+        </div>
+        
+        <!-- Aquí se mostrarán los clientes registrados -->
+        <div id="clientList" class="client-list"></div>
+    </div>
+
+    <script >
+        // Array en el cual se almacenan los clientes ingresados
+        let clientes = [];
+
+        // Función para validar el correo electrónico
+        function validarCorreo(correo) {
+            // Usa una expresión regular para verificar el formato del email
+            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return regex.test(correo);
+        }
+
+        // Función para validar que el DNI tenga solo números y 10 dígitos
+        function validarDNI(dni) {
+            //expresión regular para validar el formato del dni
+            const regex = /^\d{10}$/;
+            return regex.test(dni);
+        }
+
+        // Función para validar que el teléfono tenga 10 dígitos, solo números y empiece con 09
+        function validarTelefono(telefono) {
+            //ecpresion regular para validar el formato teléfono
+            const regex = /^09\d{8}$/;
+            return regex.test(telefono);
+        }
+
+        // Función para validar que el texto solo contenga letras y espacios 
+        // (para nombre y apellido)
+        function validarTexto(texto) {
+            //expresión regular para validar el formato del texto que usamos en
+            // nombre y apellido
+            const regex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
+            return regex.test(texto.trim());
+        }
+
+        // al hacer clic en ingresar cliente
+        document.getElementById('btnIngresar').addEventListener('click', function() {
+            // Obtiene los valores de los campos del formulario
+            const nombre = document.getElementById('nombre').value;
+            const apellido = document.getElementById('apellido').value;
+            const dni = document.getElementById('dni').value;
+            const telefono = document.getElementById('telefono').value;
+            const correo = document.getElementById('correo').value;
+            
+            // Verifica que todos los campos estén completos y usamos las funciones de validación
+            if (nombre && apellido && dni && telefono && correo) {
+                // usamos las funciones de validación de texto
+                if (!validarTexto(nombre)) {
+                    alert('El nombre solo debe contener letras y espacios de ser necesario');
+                    return;
+                }
+                // usamos las funciones de validación de texto
+                if (!validarTexto(apellido)) {
+                    alert('El apellido solo debe contener letras y espacios de ser necesario');
+                    return;
+                }
+                // usamos la función de validación de dni
+                if (!validarDNI(dni)) {
+                    alert('El DNI debe contener solo números y tener 10 dígitos');
+                    return;
+                }
+                // usamos la función de validación de teléfono
+                if (!validarTelefono(telefono)) {
+                    alert('El teléfono debe tener 10 dígitos, solo números y empezar con 09');
+                    return;
+                }
+                // usamos la función de validación de correo
+                if (correo && !validarCorreo(correo)) {
+                    alert('Correo no válido');
+                    return;
+                }
+                // Si todo es válido, agrega el cliente al array
+                clientes.push({
+                    nombre,
+                    apellido,
+                    dni,
+                    telefono,
+                    correo
+                });
+                
+                // Limpia los campos del formulario una vez agregado el cliente
+                //para una mejor experiencia de usuario
+                document.getElementById('nombre').value = '';
+                document.getElementById('apellido').value = '';
+                document.getElementById('dni').value = '';
+                document.getElementById('telefono').value = '';
+                document.getElementById('correo').value = '';
+                // Muestra un mensaje de éxito
+                alert('Cliente agregado');
+            } else {
+                // Si falta algún campo, muestra un mensaje
+                alert('Complete los apartados');
+            }
+        });
+
+        // al hacer clic en mostrar clientes
+        document.getElementById('btnMostrar').addEventListener('click', function() {
+            // Obtiene el contenedor donde se mostrarán los clientes
+            const clientList = document.getElementById('clientList');
+            clientList.innerHTML = '';
+            
+            // Si no hay clientes, muestra un mensaje
+            if (clientes.length === 0) {
+                clientList.innerHTML = '<p>No hay clientes</p>';
+                return;
+            }
+            
+            // Recorre el array de clientes y los muestra en pantalla
+            clientes.forEach(cliente => {
+                // Por cada cliente en el array, crea un nuevo div que representará a ese cliente en la interfaz
+                const div = document.createElement('div');
+                // Asigna una clase CSS al div para poder darle estilos desde el archivo estilos.css
+                div.className = 'client-item';
+                // Inserta el contenido HTML dentro del div, mostrando los datos del cliente
+                div.innerHTML = `
+                    <p><strong>${cliente.nombre} ${cliente.apellido}</strong></p>
+                    <p>DNI: ${cliente.dni}</p>
+                    <p>Tel: ${cliente.telefono}</p>
+                    <p>Email: ${cliente.correo}</p>
+                `;
+                // Agrega el div recién creado al contenedor principal donde se listan todos los clientes
+                clientList.appendChild(div);
+            });
+        });
+    </script>
+</body>
+</html>
