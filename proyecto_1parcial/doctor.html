@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Título de la página que aparece en la pestaña del navegador -->
+    <title>Panel del Doctor - Policlínico</title>
+    <!--
+      Aquí se enlazan los estilos específicos para la vista del doctor.
+      Si quiere cambiar colores o disposición en esta pantalla, edita style-doctor.css.
+    -->
+    <link rel="stylesheet" href="style-doctor.css">
+</head>
+<body>
+    <!--
+      Contenedor principal que organiza la interfaz en dos zonas:
+      - barra lateral (aside) para opciones y navegación
+      - área principal (main) para mostrar la lista de pacientes
+    -->
+    <div class="dashboard-container">
+        <aside class="sidebar">
+
+            <div class="sidebar-header">
+                <!--
+                  Muestra el nombre del doctor en la cabecera lateral.
+                  El texto puede ser reemplazado por JavaScript para mostrar el nombre real.
+                -->
+    <h3 id="doctor-name">Dr. [Nombre Apellido]</h3>
+</div>
+
+            <nav class="sidebar-nav">
+
+                <!--
+                  Enlace que permite al doctor buscar un paciente.
+                  Tiene id para que doctor.js pueda detectar el clic y abrir un buscador o filtro.
+                -->
+                <a href="#" id="btn-buscar-paciente" class="nav-button">Buscar Paciente</a>
+
+                <!--
+                  Enlace para ir al formulario de creación de pacientes.
+                  Lleva a agregar-paciente.html donde se pueden registrar nuevos pacientes.
+                -->
+                <a href="agregar-paciente.html" class="nav-button">Agregar Paciente</a>
+
+            </nav>
+
+            <div class="sidebar-footer">
+                <!--
+                  Enlace para cerrar sesión o volver a la página principal.
+                  Redirige a index.html como salida clara para el usuario.
+                -->
+                <a href="index.html" class="logout-button">Cerrar Sesión</a>
+
+            </div>
+
+        </aside>
+
+        <!--
+          Área principal de trabajo:
+          Aquí se listan los pacientes asignados o registrados por el doctor.
+          Las acciones sobre cada fila (ver perfil, editar, agendar encuentro) las maneja doctor.js.
+        -->
+        <main class="main-content">
+            <header class="main-header">
+                <!-- Título claro que indica el contenido principal de la pantalla -->
+                <h1>Mis Pacientes</h1>
+            </header>
+            <div class="patient-list">
+                <table>
+                    <thead>
+                        <tr>
+                            <!-- Columnas que describen la información visible por paciente -->
+                            <th>Nombre Completo</th>
+                            <th>CI</th>
+                            <th>Edad</th>
+                            <th>Teléfono</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <!--
+                      <tbody id="pacientes-tbody"> es el punto donde JavaScript insertará
+                      una fila (<tr>) por cada paciente. El HTML lo deja vacío porque
+                      los datos suelen venir desde memoria, localStorage.
+                    -->
+                    <tbody id="pacientes-tbody">
+                        </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+    
+    <!--
+      Script que controla la página del doctor:
+      - añade comportamiento al botón de búsqueda,
+      - carga y muestra la lista de pacientes dentro de #pacientes-tbody,
+      - maneja acciones por fila (ver perfil, editar, agendar).
+      Si algo no aparece, conviene revisar la consola del navegador (F12).
+    -->
+    <script src="doctor.js"></script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio de Sesión - Policlínico</title>
+    <!-- Carga los estilos generales de la aplicación.
+         Si alguien quiere cambiar colores, márgenes o tipografías de la pantalla
+         de inicio de sesión, debe editar style.css. -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Contenedor principal de la pantalla de login.
+         Agrupa visualmente el formulario para poder centrarlo y aplicarle estilos. -->
+    <div class="login-container">
+        <!--
+          Formulario de inicio de sesión identificado con id="login-form".
+          El script login.js buscará este id para:
+          - escuchar el evento submit,
+          - validar las credenciales ingresadas,
+          - y redirigir según el rol del usuario (admin, doctor, paciente).
+          Si el formulario no funciona, conviene revisar login.js y la consola del navegador.
+        -->
+        <form class="login-form" id="login-form">
+            <!-- Título y texto de bienvenida que explican brevemente el propósito -->
+            <h2>Historias Clínicas</h2>
+            <p>Bienvenido al sistema del Policlínico</p>
+
+            <!--
+              Grupo para el campo de usuario:
+              - label asocia el texto al input para mejor accesibilidad.
+              - input#username es obligatorio (required) para que el navegador
+                impida enviar el formulario vacío.
+              El valor ingresado suele compararse con los datos guardados por login.js.
+            -->
+            <div class="input-group">
+                <label for="username">Usuario</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+
+            <!--
+              Grupo para la contraseña:
+              - type="password" oculta lo que escribe el usuario.
+              - input#password también es obligatorio.
+              El script puede aplicar más validaciones (longitud mínima, etc.).
+            -->
+            <div class="input-group">
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <!--
+              Botón principal que envía el formulario.
+              login.js debe interceptar el submit para procesar las credenciales
+              sin recargar la página o bien permitir la navegación según la lógica.
+            -->
+            <button type="submit" class="btn-login">Iniciar Sesión</button>
+
+            <!--
+              Botón para iniciar el flujo de recuperación de contraseña.
+              Tiene id="btn-recover" para que login.js le añada comportamiento:
+              mostrar instrucciones, enviar un correo, o mostrar un modal.
+            -->
+            <button type="button" class="btn-recover" id="btn-recover">Recuperar Contraseña</button>
+        </form>
+    </div>
+
+    <!--
+      Script que controla la pantalla de login:
+      - Añade los event listeners al formulario y al botón de recuperar.
+      - Valida las credenciales y realiza redirecciones.
+      - Si algo falla en la interacción, abrir la consola del navegador (F12)
+        ayuda a ver errores o mensajes que el script imprima.
+    -->
+    <script src="login.js"></script>
+</body>
+</html>

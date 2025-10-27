@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil del Paciente - Policlínico</title>
+    <!-- Carga los estilos específicos para la vista de perfil del paciente.
+         Aquí se controlan colores, espaciamiento y la apariencia de tablas y botones. -->
+    <link rel="stylesheet" href="style-paciente.css">
+    
+    <!-- Se incluye jsPDF desde un CDN para permitir generar PDFs del historial
+         directamente en el navegador cuando el paciente lo solicite. -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
+</head>
+<body>
+    <!-- Contenedor principal que organiza la pantalla tipo "dashboard".
+         Mantiene la estructura con una zona principal donde se muestran los datos. -->
+    <div class="dashboard-container">
+        <main class="main-content">
+            <section class="patient-info">
+    <h2>Datos Personales</h2>
+    <ul>
+        <!--
+          Cada <span> con id (p-nombre, p-ci, etc.) actúa como marcador.
+          El script perfil.js colocará aquí los valores reales del paciente al cargar la página.
+          Si aparecen vacíos, significa que el script no logró obtener los datos.
+        -->
+        <li><strong>Nombre:</strong> <span id="p-nombre"></span></li>
+        <li><strong>CI:</strong> <span id="p-ci"></span></li>
+        <li><strong>Edad:</strong> <span id="p-edad"></span> Años</li>
+        <li><strong>Teléfono:</strong> <span id="p-telefono"></span></li>
+        <li><strong>Email:</strong> <span id="p-email"></span></li>
+        <li><strong>Alergias:</strong> <span id="p-alergias"></span></li>
+    </ul>
+</section>
+            
+            <section class="visit-history">
+                <h2>Historial de Visitas</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <!-- Cabeceras que describen los datos que tendrá cada visita registrada -->
+                            <th>Fecha</th>
+                            <th>Motivo</th>
+                            <th>Diagnóstico</th>
+                            <th>Tratamiento</th>
+                            <th>Peso (kg)</th>
+                            <th>Presión</th>
+                            <th>Observaciones</th>
+                            <th>Documentos</th>
+                        </tr>
+                    </thead>
+                    <!--
+                      <tbody id="historial-tbody"> es el punto donde el script insertará una fila
+                      por cada encuentro (una <tr> con varias <td>). Dejarlo vacío permite que
+                      el contenido sea dinámico y se actualice sin recargar la página.
+                    -->
+                    <tbody id="historial-tbody">
+                        </tbody>
+                </table>
+            </section>
+
+            <section class="action-buttons">
+                <!--
+                  Botones para acciones frecuentes:
+                  - "Agregar Encuentro" lleva al formulario para registrar una nueva visita.
+                  - "Descargar Historial (PDF)" solicita al script que genere un PDF usando jsPDF.
+                  - "Volver Atrás" regresa a la vista del doctor o a la pantalla previa.
+                  perfil.js será el encargado de enlazar comportamientos (event listeners) a estos elementos.
+                -->
+                <a href="#" id="btn-agregar-encuentro" class="btn btn-primary">Agregar Encuentro</a>
+                <button id="btn-descargar-pdf" class="btn btn-secondary">Descargar Historial (PDF)</button>
+<a href="doctor.html" id="btn-volver" class="btn btn-back">Volver Atrás</a>            </section>
+        </main>
+    </div>
+    
+    <!--
+      Se carga perfil.js al final para que el DOM ya esté disponible cuando el script
+      intente rellenar los elementos con id. Perfil.js:
+      - obtiene los datos del paciente (desde localStorage, API o donde estén guardados),
+      - rellena los marcadores en "Datos Personales",
+      - construye las filas del historial dentro de #historial-tbody,
+      - y añade la lógica para los botones (agregar encuentro, generar PDF, volver).
+      Si algo no funciona, revisar la consola del navegador (F12) ayuda a encontrar errores.
+    -->
+    <script src="perfil.js"></script>
+</body>
+</html>

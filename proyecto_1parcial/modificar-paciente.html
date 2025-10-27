@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modificar Paciente - Admin</title>
+    <!-- Aquí se enlaza la hoja de estilos que da formato a los formularios de usuario.
+         Si alguien quiere cambiar colores, márgenes o tipografías de esta pantalla,
+         debe editar style-usuario.css. -->
+    <link rel="stylesheet" href="style-usuario.css">
+</head>
+<body>
+    <!--
+      .form-container agrupa todo el formulario para centrarlo y aplicar estilos de forma sencilla.
+      El diseñador dejó así la estructura para que el CSS controle posición y espaciado.
+    -->
+    <div class="form-container">
+        <!--
+          Formulario que sirve para modificar los datos de un paciente existente.
+          - El id "form-mod-paciente" permite que el script localizar el formulario y
+            rellenar los campos con los datos actuales cuando se carga la página.
+          - Al enviar, el script valida y guarda los cambios; también puede mostrar errores.
+        -->
+        <form id="form-mod-paciente">
+            <h2>Modificar Datos del Paciente</h2>
+            
+            <!--
+              Nombre completo:
+              Campo obligatorio porque identifica al paciente. JavaScript puede actualizar
+              este valor y usarlo en otras vistas después de guardar.
+            -->
+            <div class="input-group">
+                <label for="nombre">Nombre Completo</label>
+                <input type="text" id="nombre" required>
+            </div>
+            
+            <!--
+              Cédula de Identidad (CI):
+              - Se muestra como readonly porque no se espera cambiarla aquí.
+              - El fondo claro indica visualmente que no es editable.
+              - La CI actúa como identificador único para buscar y guardar el registro.
+            -->
+            <div class="input-group">
+                <label for="ci">Cédula de Identidad (CI)</label>
+                <input type="text" id="ci" required readonly style="background-color: #eee;">
+            </div>
+
+            <!--
+              Edad:
+              Campo obligatorio que indica la edad actual del paciente. El script puede
+              validar que el número sea razonable antes de guardar.
+            -->
+            <div class="input-group">
+                <label for="edad">Edad</label>
+                <input type="number" id="edad" required>
+            </div>
+
+            <!--
+              Teléfono:
+              - Campo opcional para contacto.
+              - Si el proyecto necesita validar formato (por ejemplo 10 dígitos), lo hará el script.
+            -->
+            <div class="input-group">
+                <label for="telefono">Teléfono</label>
+                <input type="tel" id="telefono">
+            </div>
+
+            <!--
+              Email:
+              - Campo opcional con type="email" para una validación básica por el navegador.
+              - El script puede realizar validaciones adicionales o normalizar la dirección.
+            -->
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email">
+            </div>
+
+            <!--
+              Nombre de usuario (para login):
+              - Se muestra como readonly porque, en este sistema, suele ser la CI.
+              - Mantenerlo readonly evita inconsistencias entre identificador y credenciales.
+            -->
+            <div class="input-group">
+    <label for="usuario">Nombre de Usuario (para login)</label>
+    <input type="text" id="usuario" readonly readonly style="background-color: #eee;" required>
+</div>
+            
+            <!--
+              Contraseña:
+              - Campo editable para permitir que el administrador actualice la contraseña.
+              - El script puede imponer reglas de seguridad (longitud mínima, complejidad).
+            -->
+            <div class="input-group">
+    <label for="password">Contraseña</label>
+    <input type="text" id="password" required>
+</div>
+
+            <!--
+              Alergias conocidas:
+              - Área de texto para anotar medicamentos o sustancias que el paciente no puede tomar.
+              - No es obligatorio, pero es información importante para el personal médico.
+            -->
+            <div class="input-group">
+                <label for="alergias">Alergias Conocidas</label>
+                <textarea id="alergias" rows="3"></textarea>
+            </div>
+            
+            <!--
+              Botones de acción:
+              - "Guardar Cambios": envía el formulario y el script se encarga de procesar los datos.
+              - "Eliminar": botón que el script puede usar para borrar el registro (debe pedir confirmación).
+              - "Cancelar": vuelve a la pantalla de administración sin guardar cambios.
+              El comportamiento concreto (confirmaciones, mensajes) lo implementa modificar-paciente.js.
+            -->
+            <div class="button-group">
+    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+    <button type="button" id="btn-eliminar" class="btn btn-delete">Eliminar</button>
+    
+    <a href="admin.html" class="btn btn-back">Cancelar</a>
+</div>
+        </form>
+    </div>
+
+    <!--
+      Script que controla esta pantalla:
+      - Carga los datos del paciente y completa los campos del formulario al abrir la página.
+      - Valida y guarda los cambios cuando se envía el formulario.
+      - Maneja la eliminación del registro si el usuario pulsa "Eliminar".
+      Si algo no funciona en la interacción, se recomienda abrir la consola del navegador (F12)
+      para ver mensajes de error o información que ayude a depurar.
+    -->
+    <script src="modificar-paciente.js"></script>
+</body>
+</html>

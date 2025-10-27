@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil - Policlínico</title>
+
+    <!--
+      Se carga la librería jsPDF desde CDN para generar PDFs en el navegador.
+      La página usa esta librería cuando el paciente pide descargar su historial.
+      La lógica de uso está en paciente-vista.js.
+    -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <!--
+      Hoja de estilos específica para la vista del paciente.
+      Controla la presentación: márgenes, tipografías y apariencia de la tabla.
+      Si quiere cambiar cómo se ve, editar style-paciente-vista.css.
+    -->
+    <link rel="stylesheet" href="style-paciente-vista.css">
+</head>
+<body>
+    <header class="main-header">
+        <!--
+          Encabezado de la página con título y salida.
+          El enlace "Salir" lleva a index.html para cerrar la sesión o volver al inicio.
+        -->
+        <h1>Policlínico - Mi Portal de Paciente</h1>
+        <a href="index.html" class="btn btn-back">Salir</a>
+    </header>
+
+    <div class="container">
+        <section class="patient-info">
+            <!--
+              Sección que muestra los datos personales del paciente.
+              Cada <span> con id (p-nombre, p-ci, etc.) es un "punto de unión"
+              que paciente-vista.js rellenará al cargar la página.
+              Si aparecen vacíos, significa que no se cargaron los datos o hubo un error.
+            -->
+            <h2>Mis Datos Personales</h2>
+            <ul>
+                <li><strong>Nombre:</strong> <span id="p-nombre"></span></li>
+                <li><strong>CI:</strong> <span id="p-ci"></span></li>
+                <li><strong>Edad:</strong> <span id="p-edad"></span> Años</li>
+                <li><strong>Teléfono:</strong> <span id="p-telefono"></span></li>
+                <li><strong>Email:</strong> <span id="p-email"></span></li>
+                <li><strong>Alergias:</strong> <span id="p-alergias"></span></li>
+            </ul>
+        </section>
+
+        <section class="visit-history">
+            <!--
+              Historial de visitas del paciente:
+              - La tabla muestra cada encuentro con fecha, motivo, diagnóstico, etc.
+              - El <tbody id="historial-tbody"> se deja vacío en el HTML porque
+                paciente-vista.js añadirá una fila (<tr>) por cada registro.
+              - Si no hay resultados, el script puede insertar una fila indicando "Sin datos".
+            -->
+            <h2>Mi Historial de Visitas</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Motivo</th>
+                        <th>Diagnóstico</th>
+                        <th>Tratamiento</th>
+                        <th>Peso (kg)</th>
+                        <th>Documentos (PDF)</th>
+                    </tr>
+                </thead>
+                <tbody id="historial-tbody">
+                    </tbody>
+            </table>
+        </section>
+
+        <section class="action-buttons">
+            <!--
+              Botón que permite descargar el historial mostrado como PDF.
+              - Al hacer clic, paciente-vista.js recoge los datos de la tabla y usa jsPDF
+                para generar y descargar el archivo.
+              - Si la descarga no funciona, revisar la consola del navegador (F12).
+            -->
+            <button id="btn-descargar-pdf" class="btn btn-secondary">Descargar Historial (PDF)</button>
+        </section>
+    </div>
+
+    <!--
+      Script principal de esta página:
+      - carga los datos del paciente (desde localStorage, API o donde se guarden),
+      - rellena los elementos con id (p-nombre, p-ci, etc.),
+      - construye las filas del historial dentro de #historial-tbody,
+      - añade comportamiento al botón de descarga para usar jsPDF.
+      Si algo no aparece o da error, conviene abrir la consola (F12) para ver mensajes.
+    -->
+    <script src="paciente-vista.js"></script>
+</body>
+</html>

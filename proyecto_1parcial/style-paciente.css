@@ -1,0 +1,257 @@
+/* --- Estilos Base y Comunes --- 
+   Esta sección hereda estilos de style-doctor.css para mantener consistencia visual */
+
+/* Configuración básica de la página:
+   - Elimina márgenes por defecto
+   - Usa una fuente fácil de leer
+   - Fondo gris claro para contraste */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+}
+
+/* Estructura principal tipo dashboard:
+   - Ocupa toda la altura de la ventana
+   - Organiza sidebar y contenido en columnas */
+.dashboard-container {
+    display: flex;
+    height: 100vh;
+}
+
+/* --- Menú Lateral (Sidebar) --- 
+   La barra lateral oscura que contiene la navegación */
+.sidebar {
+    width: 250px;
+    background-color: #343a40;
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Cabecera del menú:
+   - Espacio para el título/logo
+   - Línea separadora abajo */
+.sidebar-header {
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid #495057;
+}
+
+/* Área de navegación:
+   - Crece para llenar el espacio disponible
+   - Padding arriba para separar del header */
+.sidebar-nav {
+    flex-grow: 1;
+    padding-top: 20px;
+}
+
+/* Enlaces del menú:
+   - Bloques completos clicables
+   - Transición suave al pasar el mouse */
+.nav-button {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 15px 20px;
+    margin: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+/* Efecto hover en enlaces:
+   - Gris más claro para indicar interactividad */
+.nav-button:hover {
+    background-color: #495057;
+}
+
+/* Pie del menú lateral:
+   - Centrado y con padding
+   - Suele contener el botón de salir */
+.sidebar-footer {
+    padding: 20px;
+    text-align: center;
+}
+
+/* Botón para cerrar sesión:
+   - Rojo para destacar la acción
+   - Cambia de tono al pasar el mouse */
+.logout-button {
+    display: block;
+    background-color: #dc3545;
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.logout-button:hover {
+    background-color: #c82333;
+}
+
+/* --- Contenido Principal ---
+   Zona donde se muestra la información del paciente */
+.main-content {
+    flex-grow: 1;
+    padding: 30px;
+    overflow-y: auto;
+}
+
+/* Título principal:
+   - Sin margen superior
+   - Color oscuro para legibilidad */
+.main-header h1 {
+    margin: 0 0 20px 0;
+    color: #333;
+}
+
+/* --- Info del Paciente ---
+   Tarjeta con datos personales */
+.patient-info {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+}
+
+/* Título de la sección:
+   - Color azul para destacar
+   - Pegado al borde superior */
+.patient-info h2 {
+    margin-top: 0;
+    color: #007bff;
+}
+
+/* Lista de datos:
+   - Sin viñetas
+   - Organizada en dos columnas */
+.patient-info ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap; /* Para que se ajuste en pantallas pequeñas */
+}
+
+/* Elementos de la lista:
+   - Mitad del ancho disponible
+   - Color gris para el texto */
+.patient-info li {
+    width: 50%; /* Dos columnas */
+    margin-bottom: 10px;
+    color: #555;
+}
+
+/* Etiquetas en negrita:
+   - Color más oscuro que el valor
+   - Ancho mínimo para alineación */
+.patient-info li strong {
+    color: #333;
+    display: inline-block;
+    min-width: 100px;
+}
+
+/* --- Historial de Visitas ---
+   Tabla con el registro de consultas */
+.visit-history {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.visit-history h2 {
+    margin-top: 0;
+}
+
+.visit-history table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* Celdas y encabezados:
+   - Padding cómodo para lectura
+   - Línea inferior entre filas */
+.visit-history th, .visit-history td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #dee2e6;
+}
+
+/* Encabezados de tabla:
+   - Fondo gris claro
+   - Texto en negrita y color oscuro */
+.visit-history th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+    color: #495057;
+}
+
+/* Fila de tabla activa:
+   - Fondo gris muy claro al pasar el mouse */
+.visit-history tbody tr:hover {
+    background-color: #f1f3f5;
+}
+
+/* Enlaces a PDFs:
+   - Azules y en negrita
+   - Subrayado al pasar el mouse */
+.pdf-link {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+.pdf-link:hover {
+    text-decoration: underline;
+}
+
+/* --- Botones de Acción ---
+   Controles principales al final de la página */
+.action-buttons {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px; /* Espacio entre botones */
+}
+
+/* Estilos comunes de botones:
+   - Padding generoso para fácil clic
+   - Esquinas redondeadas */
+.action-buttons .btn, .action-buttons .btn-back {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+}
+
+/* Variantes de botones:
+   - Verde para acciones positivas
+   - Gris para acciones neutras
+   - Azul para navegación */
+.action-buttons .btn-primary {
+    background-color: #28a745; /* Verde para "Agregar" */
+    color: white;
+}
+.action-buttons .btn-primary:hover {
+    background-color: #218838;
+}
+
+.action-buttons .btn-secondary {
+    background-color: #6c757d; /* Gris para "Descargar" */
+    color: white;
+}
+.action-buttons .btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+.action-buttons .btn-back {
+    background-color: #007bff; /* Azul para "Volver" */
+    color: white;
+}
+.action-buttons .btn-back:hover {
+    background-color: #0056b3;
+}

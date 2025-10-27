@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Usuario - Policlínico</title>
+    <!-- Se carga la hoja de estilos específica para la pantalla de creación de usuarios.
+         Si alguien quiere cambiar colores o espacios aquí, debe editar style-usuario.css. -->
+    <link rel="stylesheet" href="style-usuario.css">
+</head>
+<body>
+    <!-- Contenedor principal que centra y aplica el estilo del formulario -->
+    <div class="form-container">
+        <!--
+          Formulario principal para crear un usuario.
+          Tiene id="form-usuario" para que agregar-usuario.js lo encuentre y maneje el envío.
+          El script puede validar campos, mostrar mensajes y guardar los datos.
+        -->
+        <form id="form-usuario">
+            <h2>Crear Nuevo Usuario</h2>
+
+            <!--
+              Selección del rol:
+              - El valor elegido (paciente o doctor) determina qué campos se mostrarán.
+              - El script usa este select para mostrar u ocultar #campos-doctor o #campos-paciente.
+            -->
+            <div class="input-group">
+                <label for="rol">Rol del Usuario</label>
+                <select id="rol" required>
+                    <option value="">-- Seleccione un rol --</option>
+                    <option value="paciente">Paciente</option>
+                    <option value="doctor">Doctor</option>
+                </select>
+            </div>
+
+            <hr>
+
+            <!--
+              Nombre completo del usuario.
+              Campo obligatorio porque es información básica que identifica a la persona.
+            -->
+            <div class="input-group">
+                <label for="nombre">Nombre Completo</label>
+                <input type="text" id="nombre" required>
+            </div>
+
+            <!--
+              Cédula de Identidad (CI):
+              - Se espera exactamente 10 dígitos (pattern y maxlength ayudan al navegador).
+              - La CI suele usarse como nombre de usuario en este sistema, por eso es importante.
+              - El script puede copiar este valor a los campos "usuario" o "p-usuario".
+            -->
+            <div class="input-group">
+                <label for="ci">Cédula de Identidad (CI)</label>
+                <input type="text" id="ci" required 
+                       pattern="\d{10}" 
+                       maxlength="10" 
+                       title="Debe ingresar 10 dígitos numéricos.">
+            </div>
+
+            <!--
+              Teléfono del usuario:
+              - No es obligatorio, pero se valida con pattern para 10 dígitos si se ingresa.
+              - type="tel" es semántico; el script puede realizar validaciones adicionales.
+            -->
+            <div class="input-group">
+                <label for="telefono">Teléfono</label>
+                <input type="tel" id="telefono" 
+                       pattern="\d{10}" 
+                       maxlength="10" 
+                       title="Debe ingresar 10 dígitos numéricos.">
+            </div>
+
+            <!--
+              Campos que se muestran solo si se selecciona el rol "doctor".
+              - La clase "hidden" indica que inicialmente están ocultos.
+              - El script controla la visibilidad y puede completar "usuario" copiando la CI.
+              - El campo "usuario" está readonly para evitar edición manual (se usa la CI).
+            -->
+            <div id="campos-doctor" class="hidden">
+                <div class="input-group">
+                    <label for="usuario">Nombre de Usuario</label>
+                    <input type="text" id="usuario" readonly style="background-color: #eee;" placeholder="ci será el usuario">
+                </div>
+                <div class="input-group">
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password">
+                </div>
+            </div>
+
+            <!--
+              Campos que se muestran solo si se selecciona el rol "paciente".
+              - También están ocultos por defecto y el script los habilita según el rol.
+              - Incluyen datos adicionales propios del paciente (edad, email, alergias).
+            -->
+            <div id="campos-paciente" class="hidden">
+                <div class="input-group">
+                    <label for="edad">Edad</label>
+                    <input type="number" id="edad">
+                </div>
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email">
+                </div>
+
+            <!--
+              Campo que mostrará automáticamente el nombre de usuario para el paciente.
+              - Está readonly porque se espera que sea la CI.
+              - El placeholder ayuda a que el usuario entienda qué valor aparecerá.
+            -->
+            <div class="input-group">
+                <label for="p-usuario">Nombre de Usuario (para login)</label>
+                <input type="text" id="p-usuario" readonly style="background-color: #eee;" placeholder="Ej: 1315896547 (usar CI)">
+            </div>
+                
+                <div class="input-group">
+                    <!--
+                      Contraseña para el login del paciente.
+                      - Se puede dejar vacío si el flujo del sistema crea la contraseña automáticamente.
+                      - El script puede forzar una longitud mínima o reglas de seguridad.
+                    -->
+                    <label for="p-password">Contraseña</label>
+                    <input type="password" id="p-password">
+                </div>
+                
+                <!--
+                  Alergias conocidas del paciente:
+                  - Campo abierto para que el personal médico tenga información relevante.
+                  - No es obligatorio, pero es recomendable completarlo si se conoce la información.
+                -->
+                <div class="input-group">
+                    <label for="alergias">Alergias Conocidas</label>
+                    <textarea id="alergias" rows="3"></textarea>
+                </div>
+            </div>
+
+            <!--
+              Botones al final del formulario:
+              - "Guardar Usuario": submit que disparará el manejo en agregar-usuario.js.
+              - "Regresar": enlace a admin.html para volver al panel sin guardar.
+              El script puede prevenir el envío por defecto para validar antes de guardar.
+            -->
+            <div class="button-group">
+                <button type="submit" class="btn btn-primary">Guardar Usuario</button>
+                <a href="admin.html" class="btn btn-back">Regresar</a>
+            </div>
+        </form>
+    </div>
+
+    <!--
+      Se incluye el script que controla este formulario:
+      - Mostrar/ocultar secciones según el rol.
+      - Copiar la CI al campo de usuario correspondiente.
+      - Validar campos y guardar los datos (por ejemplo en localStorage o enviarlos al servidor).
+      Si algo falla, se recomienda abrir la consola del navegador (F12) y revisar mensajes de error.
+    -->
+    <script src="agregar-usuario.js"></script>
+</body>
+</html>

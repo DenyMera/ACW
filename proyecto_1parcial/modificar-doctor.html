@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modificar Doctor - Admin</title>
+    <!-- Se carga la hoja de estilos usada por pantallas de usuarios/administración.
+         Si alguien quiere cambiar colores o espacios, debe editar style-usuario.css. -->
+    <link rel="stylesheet" href="style-usuario.css">
+</head>
+<body>
+    <!--
+      Contenedor que centra y da estilo al formulario.
+      El diseñador colocó el formulario dentro de .form-container para aplicarle reglas CSS fácilmente.
+    -->
+    <div class="form-container">
+        <!--
+          Formulario para modificar la información de un doctor.
+          - Tiene id="form-mod-doctor" para que modificar-doctor.js lo localice.
+          - El script suele rellenar los campos con los datos actuales del doctor al cargar la página.
+          - Al enviar, el script valida y guarda los cambios o muestra errores si algo falta.
+        -->
+        <form id="form-mod-doctor">
+            <h2>Modificar Datos del Doctor</h2>
+            
+            <!--
+              Campo para el nombre completo.
+              - Es obligatorio porque identifica al profesional.
+              - El JavaScript puede usarlo para mostrar el nombre actualizado en otras pantallas.
+            -->
+            <div class="input-group">
+                <label for="nombre">Nombre Completo</label>
+                <input type="text" id="nombre" required>
+            </div>
+            
+            <!--
+              Cédula de Identidad (CI):
+              - Se muestra en modo lectura (readonly) porque no se espera que cambie aquí.
+              - El fondo gris indica visualmente que no es editable.
+              - El script utiliza la CI como identificador único al guardar o buscar el registro.
+            -->
+            <div class="input-group">
+                <label for="ci">Cédula de Identidad (CI)</label>
+                <input type="text" id="ci" required readonly style="background-color: #eee;">
+            </div>
+
+            <!--
+              Teléfono del doctor:
+              - No es obligatorio, pero es útil para contacto.
+              - El script puede validar el formato antes de salvar los cambios.
+            -->
+            <div class="input-group">
+                <label for="telefono">Teléfono</label>
+                <input type="tel" id="telefono">
+            </div>
+
+            <hr>
+            
+            <!--
+              Datos de acceso:
+              - El nombre de usuario aparece como readonly porque normalmente es la CI.
+              - La contraseña es editable para permitir que el administrador la cambie.
+              - El script se encarga de aplicar las reglas de seguridad que correspondan.
+            -->
+            <div class="input-group">
+                <label for="usuario">Nombre de Usuario</label>
+                <input type="text" id="usuario" required readonly style="background-color: #eee;">
+            </div>
+
+            <div class="input-group">
+                <label for="password">Contraseña</label>
+                <input type="text" id="password" required>
+            </div>
+            
+            <!--
+              Botones de acción:
+              - "Guardar Cambios": envía el formulario; modificar-doctor.js interceptará el submit
+                para validar y persistir los cambios.
+              - "Eliminar": botón que el script puede usar para borrar el registro definitivamente.
+              - "Cancelar": vuelve al panel de administración sin guardar cambios.
+              El comportamiento exacto (confirmaciones, respuestas) lo maneja el script.
+            -->
+            <div class="button-group">
+                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                <button type="button" id="btn-eliminar" class="btn btn-delete">Eliminar</button>
+                
+                <a href="admin.html" class="btn btn-back">Cancelar</a>
+            </div>
+        </form>
+    </div>
+
+    <!--
+      Script que controla la página:
+      - Carga los datos del doctor y rellena los campos.
+      - Maneja el envío del formulario para guardar cambios.
+      - Añade la lógica del botón "Eliminar" (confirmación y borrado).
+      Si algo no funciona, se sugiere abrir la consola del navegador (F12) y revisar mensajes/errores.
+    -->
+    <script src="modificar-doctor.js"></script>
+</body>
+</html>

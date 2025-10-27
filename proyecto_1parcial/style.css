@@ -1,0 +1,110 @@
+/* Estilos base de la página:
+   - Centra el formulario de login en medio de la pantalla
+   - Usa una fuente legible y un fondo suave
+   - El alto 100vh asegura que ocupe toda la ventana */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Contenedor del formulario de login:
+   - Fondo blanco con sombra para elevarlo visualmente
+   - Bordes redondeados para modernidad
+   - Ancho máximo para mantenerlo compacto */
+.login-container {
+    padding: 40px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+/* Título del formulario:
+   - Color oscuro para contraste
+   - Espacio inferior reducido para mantener compacto */
+.login-form h2 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Texto descriptivo bajo el título:
+   - Color gris para jerarquía visual
+   - Margen inferior para separar de los campos */
+.login-form p {
+    color: #666;
+    margin-bottom: 30px;
+}
+
+/* Grupo de entrada (label + input):
+   - Margen inferior entre grupos
+   - Alineación a la izquierda para mejor lectura */
+.input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+/* Etiquetas de los campos:
+   - En negrita para destacar
+   - Color gris oscuro para legibilidad */
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+    font-weight: bold;
+}
+
+/* Campos de entrada:
+   - Ocupan todo el ancho del contenedor
+   - Bordes suaves y padding cómodo */
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+}
+
+/* Estilos comunes para botones:
+   - Ancho completo y padding generoso
+   - Sin bordes y esquinas redondeadas
+   - Cursor pointer para indicar que son clicables */
+button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+/* Botón principal de login (azul):
+   - Color llamativo para la acción principal
+   - Cambia de tono al pasar el cursor */
+.btn-login {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-login:hover {
+    background-color: #0056b3;
+}
+
+/* Botón secundario para recuperar contraseña:
+   - Color gris para acción secundaria
+   - También cambia de tono en hover */
+.btn-recover {
+    background-color: #6c757d;
+    color: white;
+}
+
+.btn-recover:hover {
+    background-color: #5a6268;
+}

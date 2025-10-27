@@ -1,0 +1,145 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+}
+
+.main-header {
+    background-color: #343a40;
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.main-header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+/* Secciones de información y historial:
+   - Fondo blanco y sombra suave para destacar del fondo
+   - Bordes redondeados para aspecto moderno */
+.patient-info, .visit-history {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+}
+
+/* Títulos de las secciones:
+   - Color azul para destacar
+   - Sin margen superior para pegarse al borde */
+.patient-info h2, .visit-history h2 {
+    margin-top: 0;
+    color: #007bff;
+}
+
+/* Lista de datos del paciente:
+   - Quita viñetas y organiza en dos columnas
+   - Permite que las columnas se ajusten en móviles */
+.patient-info ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* Elementos de la lista:
+   - Ocupa mitad del ancho en pantallas grandes
+   - Color gris para mejor contraste con etiquetas */
+.patient-info li {
+    width: 50%;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+/* Etiquetas en negrita:
+   - Color más oscuro para destacar
+   - Ancho mínimo para alinear valores */
+.patient-info li strong {
+    color: #333;
+    display: inline-block;
+    min-width: 100px;
+}
+
+/* Tabla de historial:
+   - Ocupa todo el ancho disponible
+   - Une bordes de celdas */
+.visit-history table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* Celdas de la tabla:
+   - Padding cómodo para lectura
+   - Línea inferior para separar filas */
+.visit-history th, .visit-history td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #dee2e6;
+}
+
+/* Cabeceras de la tabla:
+   - Fondo gris claro para distinguirlas */
+.visit-history th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+}
+
+/* Enlaces a PDFs:
+   - Color azul y negrita para destacar
+   - Sin subrayado para limpieza visual */
+.pdf-link {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Contenedor de botones:
+   - Espacio superior para separar de la tabla */
+.action-buttons {
+    margin-top: 20px;
+}
+
+/* Estilos comunes para botones:
+   - Padding cómodo para clic
+   - Sin borde y esquinas redondeadas */
+.btn, .btn-back, .btn-secondary {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+}
+
+/* Botón secundario (gris):
+   - Para acciones como "Descargar PDF" */
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+}
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+/* Botón rojo para salir:
+   - Destaca visualmente la acción de cerrar sesión */
+.btn-back {
+    background-color: #dc3545;
+    color: white;
+}
+.btn-back:hover {
+    background-color: #c82333;
+}

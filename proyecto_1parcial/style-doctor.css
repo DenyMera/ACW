@@ -1,0 +1,152 @@
+/* Define las reglas básicas de la página:
+   - Ajusta el margen, la fuente y el color de fondo general.
+   - Es lo primero que el desarrollador revisará para cambiar la apariencia global. */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+}
+
+/* Contenedor principal del "dashboard":
+   - Organiza la interfaz en dos columnas (sidebar + contenido).
+   - Hace que la altura ocupe toda la ventana para dar sensación de app. */
+.dashboard-container {
+    display: flex;
+    height: 100vh;
+}
+
+/* --- Menú Lateral (Sidebar) --- */
+/* Estilo de la barra lateral:
+   - Ancho fijo, fondo oscuro y texto claro para separarla visualmente del contenido.
+   - Se estructura en columna para poner cabecera, navegación y pie. */
+.sidebar {
+    width: 250px;
+    background-color: #343a40;
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Cabecera de la barra lateral:
+   - Añade padding y una línea inferior para separar visualmente la cabecera del menú. */
+.sidebar-header {
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid #495057;
+}
+
+/* Área de navegación de la sidebar:
+   - Se expande para empujar el footer hacia abajo y dejar la navegación en la parte superior. */
+.sidebar-nav {
+    flex-grow: 1; /* Empuja el footer hacia abajo */
+    padding-top: 20px;
+}
+
+/* Estilo de los enlaces del menú:
+   - Los hace bloques clicables, con padding y bordes suaves.
+   - La clase .nav-button se usa en los HTML para los enlaces del menú. */
+.nav-button {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 15px 20px;
+    margin: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+/* Efecto visual al pasar el ratón:
+   - Pequeño cambio de fondo para indicar interactividad. */
+.nav-button:hover {
+    background-color: #495057;
+}
+
+/* Pie de la sidebar:
+   - Espacio reservado para acciones secundarias como cerrar sesión. */
+.sidebar-footer {
+    padding: 20px;
+    text-align: center;
+}
+
+/* Botón de cierre de sesión:
+   - Se destaca en rojo para que el usuario identifique claramente la acción de salir. */
+.logout-button {
+    display: block;
+    background-color: #dc3545;
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+/* Hover del botón logout:
+   - Oscurece el rojo al pasar el cursor para reforzar la sensación de botón. */
+.logout-button:hover {
+    background-color: #c82333;
+}
+
+/* --- Contenido Principal --- */
+/* Área principal donde se despliega la información:
+   - Ocupa el resto del ancho disponible y permite desplazamiento vertical si es necesario. */
+.main-content {
+    flex-grow: 1;
+    padding: 30px;
+    overflow-y: auto; /* Permite scroll si la tabla es muy grande */
+}
+
+/* Estilo del encabezado dentro del área principal:
+   - Ajusta márgenes y color del título para lectura cómoda. */
+.main-header h1 {
+    margin: 0 0 20px 0;
+    color: #333;
+}
+
+/* --- Tabla de Pacientes / Usuarios --- */
+/* Diseño general de la tabla:
+   - Ancho completo, fondo blanco y sombra suave para destacar sobre el fondo gris. */
+.patient-list table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Espaciado en celdas:
+   - Padding cómodo para facilitar la lectura y línea inferior para separar filas. */
+.patient-list th, .patient-list td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #dee2e6;
+}
+
+/* Apariencia de las cabeceras:
+   - Fondo ligeramente distinto y texto en tono neutro para diferenciarlas del cuerpo. */
+.patient-list th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+    color: #495057;
+}
+
+/* Resalte al pasar el cursor por una fila:
+   - Mejora la experiencia al revisar muchas filas. */
+.patient-list tbody tr:hover {
+    background-color: #f1f3f5;
+}
+
+/* Botones de acción dentro de la tabla:
+   - Se usan para acciones como ver, editar o agendar.
+   - Tienen transición para que el hover sea más agradable. */
+.action-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.action-btn:hover {
+    background-color: #0056b3;
+}

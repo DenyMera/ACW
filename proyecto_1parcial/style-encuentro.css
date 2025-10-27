@@ -1,0 +1,114 @@
+/* Estilos base de la página:
+   - Centra el formulario vertical y horizontalmente
+   - Usa una fuente legible y un fondo suave
+   - El padding evita que el contenido toque los bordes */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Contenedor del formulario:
+   - Fondo blanco con sombra suave para destacarlo
+   - Bordes redondeados para un look moderno
+   - Ancho máximo para que no se estire demasiado */
+.form-container {
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+}
+
+/* Título del formulario:
+   - Centrado y con un color oscuro para legibilidad
+   - Espacio inferior para separarlo de los campos */
+form h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 25px;
+}
+
+/* Grupo de entrada (label + input/textarea):
+   - Espacio entre grupos para separar visualmente los campos */
+.input-group {
+    margin-bottom: 15px;
+}
+
+/* Etiquetas de los campos:
+   - En negrita y color gris para guiar al usuario
+   - Separadas del input para mejor lectura */
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+    font-weight: bold;
+}
+
+/* Campos de entrada y áreas de texto:
+   - Ocupan todo el ancho disponible
+   - Bordes suaves y padding cómodo para escribir
+   - Misma fuente que el resto para consistencia */
+.input-group input,
+.input-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; 
+    font-family: Arial, sans-serif;
+}
+
+/* Grupo de botones al final del formulario:
+   - Separación superior del último campo
+   - Espacio entre botones usando gap */
+.button-group {
+    margin-top: 25px;
+    display: flex;
+    gap: 10px;
+}
+
+/* Estilo común para todos los botones:
+   - Mismo tamaño (flex-grow)
+   - Aspecto consistente con padding y bordes
+   - Cursor pointer para indicar que son clicables */
+.button-group .btn {
+    flex-grow: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-decoration: none;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Botón principal (verde):
+   - Para acciones positivas como "Guardar" o "Agregar"
+   - Cambia de tono al pasar el cursor */
+.btn-primary {
+    background-color: #28a745;
+    color: white;
+}
+.btn-primary:hover {
+    background-color: #218838;
+}
+
+/* Botón secundario (gris):
+   - Para acciones neutrales como "Volver" o "Cancelar"
+   - También cambia de tono en hover */
+.btn-back {
+    background-color: #6c757d;
+    color: white;
+}
+.btn-back:hover {
+    background-color: #5a6268;
+}

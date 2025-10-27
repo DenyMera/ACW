@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración - Policlínico</title>
+    <!-- Aquí se enlaza la hoja de estilos específica para la vista de administrador.
+         El diseñador o desarrollador la usa para controlar colores, tamaños y disposición
+         de los elementos que se ven en esta página. -->
+    <link rel="stylesheet" href="style-admin.css">
+</head>
+<body>
+    <!-- Contenedor principal que organiza la barra lateral y el área de contenido.
+         Se usa para mantener una estructura clara: menú a la izquierda y trabajo a la derecha. -->
+    <div class="dashboard-container">
+        <!-- Barra lateral: contiene el título del rol y las opciones de navegación.
+             Es la zona donde el administrador elige acciones rápidas. -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <!-- Muestra el rol del usuario que está usando la página. -->
+                <h3>Administrador</h3>
+            </div>
+            <nav class="sidebar-nav">
+                <!--
+                  Enlaces del menú lateral:
+                  - El primero tiene id para que el JavaScript pueda detectar cuando se hace clic
+                    y ejecutar una función (por ejemplo abrir un buscador o mostrar un formulario).
+                  - El segundo lleva a la página para agregar un usuario nuevo.
+                  Estos enlaces conectan la interfaz visual con la lógica que está en admin.js.
+                -->
+                <a href="#" id="btn-buscar-usuario" class="nav-button">Buscar Usuario</a>
+                <a href="agregar-usuario.html" class="nav-button">Agregar Usuario</a>
+            </nav>
+            <div class="sidebar-footer">
+                <!-- Enlace para cerrar sesión o volver a la página principal. Es una salida clara para el usuario. -->
+                <a href="index.html" class="logout-button">Cerrar Sesión</a>
+            </div>
+        </aside>
+
+        <!-- Área principal: aquí se muestran y gestionan los usuarios del sistema.
+             Es la zona donde el administrador realiza la mayoría de acciones. -->
+        <main class="main-content">
+            <header class="main-header">
+                <!-- Título que indica la función de la pantalla actual. -->
+                <h1>Gestión de Usuarios del Sistema</h1>
+            </header>
+            <div class="user-list">
+                <!-- Tabla para listar usuarios.
+                     Las columnas indican qué información se mostrará por usuario:
+                     rol, nombre completo, CI/usuario, teléfono y opciones para modificar.
+                     El cuerpo de la tabla queda vacío en el HTML porque el script lo rellenará. -->
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rol</th>
+                            <th>Nombre Completo</th>
+                            <th>CI / Usuario</th>
+                            <th>Teléfono</th>
+                            <th>Modificaciones</th>
+                        </tr>
+                    </thead>
+                    <!--
+                      <tbody id="usuarios-tbody"> actúa como punto de unión entre HTML y JavaScript.
+                      El script busca este id y añade una fila (<tr>) por cada usuario encontrado.
+                      De esta forma la tabla se genera dinámicamente sin recargar la página.
+                    -->
+                    <tbody id="usuarios-tbody">
+                        </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <!--
+      Se carga admin.js al final del body para que el HTML ya exista cuando el script intente
+      acceder a los elementos de la página (por ejemplo el botón con id "btn-buscar-usuario"
+      o el tbody con id "usuarios-tbody"). Admin.js:
+      - añade escuchadores de eventos a botones,
+      - obtiene o construye la lista de usuarios,
+      - inserta filas en la tabla y maneja acciones como editar o eliminar.
+      Si algo no funciona en la interfaz, conviene revisar la consola del navegador (F12).
+    -->
+    <script src="admin.js"></script>
+</body>
+</html>

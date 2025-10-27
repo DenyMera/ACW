@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Encuentro - Policlínico</title>
+    <!--
+      Aquí se enlaza la hoja de estilos específica para los formularios de encuentros.
+      El diseñador la usa para que el formulario tenga márgenes, colores y tamaños adecuados.
+      Si se desea cambiar la apariencia de esta página, se edita "style-encuentro.css".
+    -->
+    <link rel="stylesheet" href="style-encuentro.css">
+</head>
+<body>
+    <!--
+      Contenedor principal del formulario.
+      El autor agrupó todo dentro de .form-container para aplicarle estilo fácilmente.
+    -->
+    <div class="form-container">
+        <!--
+          Formulario para crear un nuevo encuentro clínico.
+          Tiene id="form-encuentro" para que encuentro.js pueda encontrarlo y manejar el envío.
+          Los campos con "required" obligan al usuario a completarlos antes de enviar.
+        -->
+        <form id="form-encuentro">
+            <h2>Nuevo Encuentro Clínico</h2>
+            
+            <!--
+              Grupo de entrada para la fecha.
+              Se usa <input type="date"> para que el navegador muestre un selector de fecha.
+              El campo es obligatorio (required).
+            -->
+            <div class="input-group">
+                <label for="fecha">Fecha</label>
+                <input type="date" id="fecha" required>
+            </div>
+
+            <!--
+              Motivo de la visita: texto simple.
+              El desarrollador marcó este campo como required porque es información importante.
+            -->
+            <div class="input-group">
+                <label for="motivo">Motivo de la Visita</label>
+                <input type="text" id="motivo" required>
+            </div>
+
+            <!--
+              Peso en kilogramos: se acepta número decimal (step="0.1").
+              No es obligatorio, por eso no tiene "required".
+            -->
+            <div class="input-group">
+                <label for="peso">Peso (kg)</label>
+                <input type="number" step="0.1" id="peso">
+            </div>
+
+            <!--
+              Campo libre para la presión arterial.
+              Se pone como texto para permitir formatos como "120/80".
+            -->
+            <div class="input-group">
+                <label for="presion">Presión Arterial</label>
+                <input type="text" id="presion" placeholder="Ej: 120/80">
+            </div>
+
+            <!--
+              Diagnóstico: textarea obligatorio.
+              Se usa textarea para permitir varias líneas y una descripción más amplia.
+            -->
+            <div class="input-group">
+                <label for="diagnostico">Diagnóstico</label>
+                <textarea id="diagnostico" rows="3" required></textarea>
+            </div>
+
+            <!--
+              Tratamiento: textarea para indicar el tratamiento sugerido o prescrito.
+              No es obligatorio, puede dejarse vacío si no hay tratamiento en ese encuentro.
+            -->
+            <div class="input-group">
+                <label for="tratamiento">Tratamiento</label>
+                <textarea id="tratamiento" rows="3"></textarea>
+            </div>
+
+            <!--
+              Observaciones: espacio para notas complementarias del profesional.
+              También es opcional.
+            -->
+            <div class="input-group">
+                <label for="observaciones">Observaciones</label>
+                <textarea id="observaciones" rows="3"></textarea>
+            </div>
+
+            <!--
+              Subida de documento en PDF:
+              - accept="application/pdf" indica que solo se permiten archivos PDF.
+              - El script encuentro.js puede leer este input para guardar o previsualizar el archivo.
+            -->
+            <div class="input-group">
+                <label for="pdf-upload">Subir Documento (PDF)</label>
+                <input type="file" id="pdf-upload" accept="application/pdf">
+            </div>
+            
+            <!--
+              Botones de acción:
+              - El botón "Agregar" es de tipo submit y provocará que el formulario intente enviarse.
+                El script asociado debería interceptar el submit para validar y guardar los datos.
+              - El enlace "Regresar" tiene id="btn-regresar" para que encuentro.js pueda añadirle
+                comportamiento (volver a la lista de encuentros, por ejemplo).
+            -->
+            <div class="button-group">
+                <button type="submit" class="btn btn-primary">Agregar</button>
+                <a href="#" id="btn-regresar" class="btn btn-back">Regresar</a>
+            </div>
+
+    <script src="encuentro.js"></script>
+</body>
+</html>
