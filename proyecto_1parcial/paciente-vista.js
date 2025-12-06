@@ -52,7 +52,21 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 3.2. Llamamos a la función (definida abajo) que carga el historial
     // de encuentros y lo muestra en la tabla del HTML.
-    cargarEncuentros(pacienteId); 
+    cargarEncuentros(pacienteId);
+    
+    const btnJson = document.getElementById('btn-exportar-json');
+    if (btnJson) {
+        btnJson.addEventListener('click', function() {
+            exportarDatosJSON(pacienteId);
+        });
+    }
+
+    const btnXml = document.getElementById('btn-exportar-xml');
+    if (btnXml) {
+        btnXml.addEventListener('click', function() {
+            exportarDatosXML(pacienteId);
+        });
+    }
     
 }); // <-- Fin del 'DOMContentLoaded'
 
@@ -254,4 +268,137 @@ function generarPDF(pacienteId) {
         console.error('Error durante la creación del PDF:', e);
         alert('Ocurrió un error inesperado al generar el PDF.');
     }
+}
+
+/**
+ * Función para exportar datos completos en formato XML
+ * Incluye toda la información médica disponible.
+ */
+function exportarDatosXML(id) {
+    const pacientes = JSON.parse(localStorage.getItem('pacientes_lista')) || [];
+    const paciente = pacientes.find(p => p.ci === id);
+    const key = `paciente_${id}`;
+    const encuentros = JSON.parse(localStorage.getItem(key)) || [];
+
+    if (!paciente) {
+        alert("No se encontraron datos.");
+        return;
+    }
+
+    let xmlString = '<?xml version="1.0" encoding="UTF-8"?>\n';
+    xmlString += '<expediente_medico>\n';
+    
+    // Datos del Paciente
+    xmlString += '  <datos_paciente>\n';
+    xmlString += `    <nombre>${paciente.nombre}</nombre>\n`;
+    xmlString += `    <ci>${paciente.ci}</ci>\n`;
+    xmlString += `    <edad>${paciente.edad}</edad>\n`;
+    xmlString += `    <telefono>${paciente.telefono || 'N/A'}</telefono>\n`;
+    xmlString += `    <email>${paciente.email || 'N/A'}</email>\n`;
+    xmlString += `    <alergias>${paciente.alergias || 'Ninguna'}</alergias>\n`;
+    xmlString += '  </datos_paciente>\n';
+
+    // Historial Médico Completo
+    xmlString += '  <historial_encuentros>\n';
+    if(encuentros.length === 0) {
+        xmlString += '    <nota>Sin encuentros registrados</nota>\n';
+    } else {
+        encuentros.forEach((enc, index) => {
+            xmlString += `    <encuentro id="${index + 1}">\n`;
+            xmlString += `      <fecha>${enc.fecha || ''}</fecha>\n`;
+            xmlString += `      <motivo>${enc.motivo || ''}</motivo>\n`;
+            xmlString += `      <peso_kg>${enc.peso || ''}</peso_kg>\n`;
+            xmlString += `      <presion_arterial>${enc.presion || ''}</presion_arterial>\n`;
+            xmlString += `      <diagnostico>${enc.diagnostico || ''}</diagnostico>\n`;
+            xmlString += `      <tratamiento>${enc.tratamiento || ''}</tratamiento>\n`;
+            xmlString += `      <observaciones>${enc.observaciones || ''}</observaciones>\n`;
+            xmlString += `      <documento_adjunto>${enc.pdfData ? 'Si' : 'No'}</documento_adjunto>\n`;
+            xmlString += '    </encuentro>\n';
+        });
+    }
+    xmlString += '  </historial_encuentros>\n';
+    xmlString += '</expediente_medico>';
+
+    const blob = new Blob([xmlString], { type: "application/xml" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `mi-historial-${id}.xml`; // Nombre de archivo personalizado para el paciente
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+}
+
+/**
+ * Función para exportar datos en formato JSON (Manual y Seguro)
+ * Excluye credenciales y se construye manualmente.
+ */
+function exportarDatosJSON(id) {
+    const pacientes = JSON.parse(localStorage.getItem('pacientes_lista')) || [];
+    const paciente = pacientes.find(p => p.ci === id);
+    const key = `paciente_${id}`;
+    const encuentros = JSON.parse(localStorage.getItem(key)) || [];
+
+    if (!paciente) {
+        alert("No se encontraron datos para exportar.");
+        return;
+    }
+
+    const limpiar = (texto) => {
+        if (!texto) return "";
+        return texto.toString()
+            .replace(/\\/g, '\\\\')
+            .replace(/"/g, '\\"')
+            .replace(/\n/g, ' ');
+    };
+
+    let jsonString = '{\n';
+
+    // Info Paciente (Sin Usuario/Password)
+    jsonString += '    "info_paciente": {\n';
+    jsonString += `        "nombre": "${limpiar(paciente.nombre)}",\n`;
+    jsonString += `        "ci": "${limpiar(paciente.ci)}",\n`;
+    jsonString += `        "edad": ${paciente.edad},\n`;
+    jsonString += `        "telefono": "${limpiar(paciente.telefono || 'N/A')}",\n`;
+    jsonString += `        "email": "${limpiar(paciente.email || 'N/A')}",\n`;
+    jsonString += `        "alergias": "${limpiar(paciente.alergias || 'Ninguna')}"\n`;
+    jsonString += '    },\n';
+
+    // Historial
+    jsonString += '    "historial_medico": [\n';
+    encuentros.forEach((enc, index) => {
+        jsonString += '        {\n';
+        jsonString += `            "id_encuentro": ${index + 1},\n`;
+        jsonString += `            "fecha": "${limpiar(enc.fecha)}",\n`;
+        jsonString += `            "motivo": "${limpiar(enc.motivo)}",\n`;
+        jsonString += `            "peso_kg": "${limpiar(enc.peso)}",\n`;
+        jsonString += `            "presion_arterial": "${limpiar(enc.presion)}",\n`;
+        jsonString += `            "diagnostico": "${limpiar(enc.diagnostico)}",\n`;
+        jsonString += `            "tratamiento": "${limpiar(enc.tratamiento)}",\n`;
+        jsonString += `            "observaciones": "${limpiar(enc.observaciones)}",\n`;
+        jsonString += `            "tiene_documento_adjunto": "${enc.pdfData ? 'Si' : 'No'}"\n`;
+        
+        if (index < encuentros.length - 1) {
+            jsonString += '        },\n';
+        } else {
+            jsonString += '        }\n';
+        }
+    });
+    jsonString += '    ],\n';
+
+    // Metadata
+    jsonString += '    "metadata": {\n';
+    jsonString += `        "fecha_exportacion": "${new Date().toISOString()}",\n`;
+    jsonString += `        "total_encuentros": ${encuentros.length}\n`;
+    jsonString += '    }\n';
+    jsonString += '}';
+
+    const blob = new Blob([jsonString], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `mi-historial-${id}.json`; // Nombre de archivo personalizado
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
 }
